@@ -2,13 +2,12 @@ class Cell {
 
     #live;
     constructor(live) {
-        if (live === false || live === true) {
-            this.#live = live;
-        } else {
+        if (typeof live !== "boolean") {
             throw new Error("Invalid value given for creation of cell.");
-        }
-
-    }
+            
+        } 
+        this.#live = live;
+}
 
     isAlive() {
         return this.#live;
