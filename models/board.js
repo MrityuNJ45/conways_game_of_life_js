@@ -64,6 +64,11 @@ class Board {
     }
 
 
+    boardForNextGeneration(){
+        
+    }
+
+
 }
 
 
