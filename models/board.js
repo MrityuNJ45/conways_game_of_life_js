@@ -1,4 +1,5 @@
 const { Cell } = require("../models/cell")
+const { isCellAliveAt, getNumberOfALiveNeighboursAt } = require("./cellBoardCommunicator")
 
 class Board {
 
@@ -6,20 +7,26 @@ class Board {
     #columns;
     #matrix;
 
-    constructor(rows, columns) {
+    constructor(rows, columns, matrix = []) {
         if (typeof rows !== "number" || typeof columns !== "number" || rows <= 0 || columns <= 0) {
             throw new Error("Invalid rows and columns");
         }
+
         this.#rows = rows;
         this.#columns = columns;
-        this.#matrix = [];
-        for (let row = 0; row < this.#rows; row++) {
-            let cellRow = [];
-            for (let column = 0; column < this.#columns; column++) {
-                cellRow.push(new Cell(false));
+        if (arguments.length == 2) {
+            this.#matrix = [];
+            for (let row = 0; row < this.#rows; row++) {
+                let cellRow = [];
+                for (let column = 0; column < this.#columns; column++) {
+                    cellRow.push(new Cell(false));
+                }
+                this.#matrix.push(cellRow);
             }
-            this.#matrix.push(cellRow);
+        }else{
+            this.#matrix = matrix;
         }
+
     }
 
 
@@ -64,8 +71,18 @@ class Board {
     }
 
 
-    boardForNextGeneration(){
-        
+    boardForNextGeneration() {
+        let nextMatrix = [];
+        for (let row = 0; row < this.#rows; row++){
+            let nextMatrixCellRow = [];
+            for(let column = 0; column < this.#columns; column++){
+                let noOfLiveNeighbours = getNumberOfALiveNeighboursAt(row,column,this.#matrix);
+                let nextCell = this.#matrix[row][column].nextGenerationCell();
+                nextMatrixCellRow.push(nextCell);
+            }
+            nextMatrix.push(nextMatrixCellRow);
+        }
+        return new Board(this.#rows, this.#columns, nextMatrix);
     }
 
 

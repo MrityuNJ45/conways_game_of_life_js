@@ -41,3 +41,11 @@ test("Expects to return false when initial board is compared with another board 
     board.populate();
     expect(board.equals(anotherBoard)).toBe(false);
 })
+
+
+test("Expects to false when a populated board is compared with it's next generation board", () => {
+    let board = new Board(4, 4);
+    board.populate();
+    let nextBoard = board.boardForNextGeneration();
+    expect(board.equals(nextBoard)).toBe(false);
+})

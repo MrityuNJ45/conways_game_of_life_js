@@ -48,5 +48,5 @@ test("should return live cell when no. of live neighbours will be equal to 3 for
     let cell = new Cell(false);
     let resultCell = cell.nextGenerationCell(3);
     expect(resultCell.isAlive()).toBe(false);
-    
+
 });
