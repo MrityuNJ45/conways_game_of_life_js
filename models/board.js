@@ -23,7 +23,7 @@ class Board {
                 }
                 this.#matrix.push(cellRow);
             }
-        }else{
+        } else {
             this.#matrix = matrix;
         }
 
@@ -73,11 +73,11 @@ class Board {
 
     boardForNextGeneration() {
         let nextMatrix = [];
-        for (let row = 0; row < this.#rows; row++){
+        for (let row = 0; row < this.#rows; row++) {
             let nextMatrixCellRow = [];
-            for(let column = 0; column < this.#columns; column++){
-                let noOfLiveNeighbours = getNumberOfALiveNeighboursAt(row,column,this.#matrix);
-                let nextCell = this.#matrix[row][column].nextGenerationCell();
+            for (let column = 0; column < this.#columns; column++) {
+                let noOfLiveNeighbours = getNumberOfALiveNeighboursAt(row, column, this.#matrix);
+                let nextCell = this.#matrix[row][column].nextGenerationCell(noOfLiveNeighbours);
                 nextMatrixCellRow.push(nextCell);
             }
             nextMatrix.push(nextMatrixCellRow);
@@ -85,6 +85,19 @@ class Board {
         return new Board(this.#rows, this.#columns, nextMatrix);
     }
 
+    print() {
+        for (let row = 0; row < this.#rows; row++) {
+            let cellRow = [];
+            for (let column = 0; column < this.#columns; column++) {
+                if (this.#matrix[row][column].isAlive()) {
+                    cellRow.push(1);
+                    continue;
+                }
+                cellRow.push(0);
+            }
+            console.log(cellRow.join(" "));
+        }
+    }
 
 }
 

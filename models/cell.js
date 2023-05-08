@@ -21,7 +21,7 @@ class Cell {
             }
         }
         if (numOfAliveNeighbours == 3) {
-            return new Cell(false);
+            return new Cell(true);
         }
         return new Cell(false);
     }
