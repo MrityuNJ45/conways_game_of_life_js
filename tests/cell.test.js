@@ -43,10 +43,10 @@ test("should return dead cell when no. of live neighbours will be less than 2 or
 });
 
 
-test("should return live cell when no. of live neighbours will be equal to 3 for dead cell", () => {
+test("should return live cell when no. of live neighbours will be equal to 3 for a dead cell", () => {
 
     let cell = new Cell(false);
     let resultCell = cell.nextGenerationCell(3);
-    expect(resultCell.isAlive()).toBe(false);
+    expect(resultCell.isAlive()).toBe(true);
 
 });
